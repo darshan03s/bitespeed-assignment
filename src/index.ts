@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import { checkDbConnection } from './db/index.js';
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.get('/', (req, res) => {
 app.get('/health', (req, res) => {
   res.status(200).json({ message: 'OK' });
 });
+
+await checkDbConnection();
 
 app.listen(PORT, () => {
   console.log(`Listening on PORT: ${PORT}`);
